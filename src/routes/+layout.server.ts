@@ -1,5 +1,5 @@
-
-export const load = async () => {
+import type { LayoutServerLoad } from './$types';
+export const load:LayoutServerLoad= async () => {
     try {
        
     const response = await fetch(`http://localhost:8081/api/v1/planets/`, {
@@ -12,12 +12,9 @@ export const load = async () => {
         console.log('ошибка не 200');
         
     }
-    const data = await response.json();
-    console.log(data, 'log377');
-    return {
-        body: {
-            planets: data,
-        },
+    const planets = await response.json();
+    return { 
+          planets:planets.data, 
     };
     } catch (error) {
         console.log(error , 'oshibka');

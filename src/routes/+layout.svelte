@@ -1,8 +1,9 @@
 <script lang="ts">  
-import './style.css';
+import './global.css';
 
-import Header from './header.svelte';
-    export let data;
+import Header from '../lib/Component/header.svelte';
+import type { LayoutData } from './$types';
+    export let data:LayoutData;
    
 </script>
 <header>

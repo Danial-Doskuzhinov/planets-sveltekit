@@ -1,7 +1,9 @@
 
 <script lang="ts">
-export let data;
-let planets = data.body?.planets.data;	
+	import type { LayoutData } from "../../routes/$types";
+export let data:LayoutData;
+$: planets = data.planets;	
+
 </script>
 <header>
     <div>
@@ -50,18 +52,6 @@ line-height: normal;
 letter-spacing: -0.06563rem;
 text-transform: uppercase;
     }
-
-    .line{
-         width: 90rem;
-         height: 0.0625rem;
-         flex-shrink: 0;
-         opacity: 0.2;
-         background: #FFF;
-   }
-  
-
-		
-	
 	.line{
 		width: 90rem;
 height: 0.0625rem;

@@ -1,29 +1,11 @@
 <script lang="ts">
-  export let data;
-  let planetData = data && data.body && data.body.data;
-  let planet = planetData || {
-    id: '',
-    name: '',
-    rotation: 0,
-    revolution: 0,
-    radius: 0,
-    temperature:0,
-    overview:{
-      content:'',
-      source:'',
-    },
-    structure:{
-      content:'',
-      source:'',
-    },
-    geology:{
-      content:'',
-      source:'',
-    }
-     
-  };
-  let content1 =planet.overview.content;
-  let source1= planet.overview.source;
+  import Footer from "../../../lib/Component/footer.svelte";
+	import type { PageData } from "./$types";
+  export let data:PageData;
+  $: planet =data.items;
+  
+  $: content1 =planet.overview.content;
+  $: source1= planet.overview.source;
 
   function handle1() {
     content1 = planet.overview.content;
@@ -70,14 +52,14 @@
     "saturn": "/planet/saturn3.svg",
     "uranus": "/planet/uranus3.svg",
   };
-let image1 =planetImage[planet.id];
+$: image1 =planetImage[planet.id];
 
 </script>
 {#if planet}
 <main class="planet-main">
 {#if planetImage[planet.id]}
   <picture>
-    <img src={image1} alt={planet.id} />
+    <img class="img" src={image1} alt={planet.id} />
   </picture>
 {/if}
 
@@ -91,22 +73,15 @@ let image1 =planetImage[planet.id];
   <button on:click={handle3}  class="btn" type="button"><h3 class="btn-overview"> Surface Geology</h3></button><br>
 </div>
 </main>
-   
-<footer>
-  <div class="footer"><p class="footer-03">ROTATION TIME</p> <p class="footer-number">{planet.rotation}</p> </div>
-  <div class="footer"><p class="footer-03">REVOLUTION TIME</p> <p class="footer-number">{planet.revolution}</p> </div>
-  <div class="footer"><p class="footer-03">RADIUS</p> <p class="footer-number">{planet.radius}</p> </div>
-  <div class="footer"><p class="footer-03">AVERAGE TEMP.</p> <p class="footer-number">{planet.temperature}</p> </div>
-</footer>
-   
+   <Footer {planet}/>   
 {/if}  
 
 
 
 <style>
-  img{
+  .img{
     margin-top: 5rem;
-    margin-left: 13rem;
+    margin-left: 14rem;
   }
   .planet-main{
     display: flex;
@@ -167,38 +142,6 @@ letter-spacing: 0.16069rem;
 text-transform: uppercase;
   }
  
-  .footer-03{
-    margin-top: 1.5rem;
-    margin-left: 3rem;
-    color: #FFF;
-font-family: Spartan;
-font-size: 0.9rem;
-font-style: normal;
-font-weight: 700;
-line-height: 1.5625rem; /* 227.273% */
-letter-spacing: 0.0625rem;
-text-transform: uppercase;
-opacity: 1.5;
-  }
-  footer{
-    display: flex;
-    justify-content: center;
-    margin-top: 5.45rem;
-  }
-  .footer{
-    margin-left: 1.9rem;
-    width: 15.9375rem;
-height: 8rem;
-flex-shrink: 0;
-border: 1px solid #FFF;
-opacity: 0.4;
-  }
-  .footer-number{
-    margin-top: 1.3rem;
-    margin-left: 3rem;
-    color: #FFF;
-    letter-spacing: -0.09375rem;
-
-  }
+  
 
 </style>

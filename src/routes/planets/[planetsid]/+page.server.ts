@@ -1,8 +1,7 @@
-import type { Load } from "@sveltejs/kit";
-
-export const load: Load = async ({ fetch, params }) => {
+import type { PlanetsInfo } from "../../../../type";
+import type { PageServerLoad } from './$types';
+export const load: PageServerLoad = async ({ params }) => {
 try {
-    console.log('dsssddddssssssssssss', params);
     const { planetsid } = params; 
     const response = await fetch(`http://localhost:8081/api/v1/planets/${planetsid}`);
      
@@ -16,33 +15,34 @@ try {
         };
     }
     
-    const data = await response.json();
+    const items = await response.json();
     return {
-        body:{
-            data:{
-                id:data.id,
-                name:data.name,
-                rotation:data.rotation,
-                revolution:data.revolution,
-                radius:data.radius,
-                temperature:data.temperature,
+        items,
+            // data:{
+            //     id:data.id,
+            //     name:data.name,
+            //     rotation:data.rotation,
+            //     revolution:data.revolution,
+            //     radius:data.radius,
+            //     temperature:data.temperature,
                 
-                overview:{
-                    content:data.overview.content,
-                    source:data.overview.source,
-                },
-                structure:{
-                    content:data.structure.content,
-                    source:data.structure.source,
-                },
-                geology:{
-                    content:data.geology.content,
-                    source:data.geology.source,
-                }
-            }
-        }
+            //     overview:{
+            //         content:data.overview.content,
+            //         source:data.overview.source,
+            //     },
+            //     structure:{
+            //         content:data.structure.content,
+            //         source:data.structure.source,
+            //     },
+            //     geology:{
+            //         content:data.geology.content,
+            //         source:data.geology.source,
+            //     }
+            // }
+        
         
         }
+
     } catch (error) {
     console.log(error , 'function');
     
