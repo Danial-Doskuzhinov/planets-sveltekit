@@ -53,7 +53,25 @@
     "uranus": "/planet/uranus3.svg",
   };
 $: image1 =planetImage[planet.id];
-
+async function sendData() {
+  try {
+    const res = await fetch('/api/v1/planets', {
+      method:"POST",
+      body: JSON.stringify({
+        id: planet.id,
+        name: planet.name,
+        radius: planet.radius,
+      })
+    });
+    if (!res.ok) {
+      await Promise.reject(new Error(`${res.status} , ${res.statusText}`))
+    }
+    const json = await res.json()
+  } catch (error) {
+    console.error(error);
+    
+  }
+}
 </script>
 {#if planet}
 <main class="planet-main">
@@ -75,7 +93,12 @@ $: image1 =planetImage[planet.id];
 </main>
    <Footer {planet}/>   
 {/if}  
-
+<form method="post" action="?/hello">
+  <input type="text" name="id" bind:value={planet.id}>
+  <input type="text" name="name" bind:value={planet.name}>
+  <input type="number" name="radius" bind:value={planet.radius}>
+  <button type="submit">sendData</button>
+</form>
 
 
 <style>
