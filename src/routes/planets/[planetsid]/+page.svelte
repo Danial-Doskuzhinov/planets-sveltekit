@@ -93,12 +93,12 @@ async function sendData() {
 </main>
    <Footer {planet}/>   
 {/if}  
-<form method="post" action="?/hello">
+<!-- <form method="post" action="?/hello">
   <input type="text" name="id" bind:value={planet.id}>
   <input type="text" name="name" bind:value={planet.name}>
   <input type="number" name="radius" bind:value={planet.radius}>
   <button type="submit">sendData</button>
-</form>
+</form> -->
 
 
 <style>
