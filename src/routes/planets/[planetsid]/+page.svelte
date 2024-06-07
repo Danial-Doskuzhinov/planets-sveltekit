@@ -2,24 +2,25 @@
   import Footer from "../../../lib/Component/footer.svelte";
 	import type { PageData } from "./$types";
   export let data:PageData;
-  $: planet =data.items;
+  $: planet =data.planets;
+  console.log(planet);
   
-  $: content1 =planet.overview.content;
-  $: source1= planet.overview.source;
+  $: content1 =planet.overview_content;
+  $: source1= planet.overview_source;
 
   function handle1() {
-    content1 = planet.overview.content;
-    source1 = planet.overview.source;
+    content1 = planet.overview_content;
+    source1 = planet.overview_source;
     image1 = planetImage[planet.id];;
 }
   function handle2() {
-    content1 = planet.structure.content;
-    source1 = planet.structure.source;
+    content1 = planet.structure_content;
+    source1 = planet.structure_source;
     image1 = planetImage2[planet.id];
 }
   function handle3(){
-    content1 = planet.geology.content;
-    source1 = planet.geology.source;
+    content1 = planet.geology_content;
+    source1 = planet.geology_source;
     image1 = planetImage3[planet.id];
   }
   const planetImage: Record<string, string> = { 
