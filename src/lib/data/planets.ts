@@ -1,4 +1,3 @@
-// src/lib/data/planets.js
 
 export const planets = [
     {
